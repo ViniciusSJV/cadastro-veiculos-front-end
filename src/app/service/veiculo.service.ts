@@ -10,7 +10,7 @@ import { Veiculo } from './veiculo';
 export class VeiculoService {
 
   constructor(private http:Http) { }
-
+    
     getVeiculos(): Observable<Veiculo[]> {
         return this.http.get("http://localhost:8080/RESTFull/rest/veiculoService/getVeiculos")
 	        .map(this.extractData)

@@ -12,11 +12,14 @@ import { Veiculo } from '../service/veiculo';
 	  styleUrls: ['./add-edit.component.css']
 })
 export class AddEditComponent implements OnInit {
-
+    //id do veiculo para edicao
     id: number;
     private sub: any;
+
 	  veiculo: Veiculo = new Veiculo();
     errorMessage: String;
+    
+    // form do HTML
     form;
 
 	constructor(private router: Router,
@@ -25,7 +28,8 @@ export class AddEditComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
     ngOnInit(): void {
-
+      //validacoes dos campos. Ref HTML formControlName
+      //mesma validação de campos é feita do lado do servidor
       this.form = new FormGroup({
         'alugado': new FormControl(this.veiculo.alugado),
         'placa': new FormControl(this.veiculo.placa, Validators.required),
@@ -34,9 +38,11 @@ export class AddEditComponent implements OnInit {
         'cor': new FormControl(this.veiculo.modelo, Validators.required)
   })
 
+      //variavel responsavel por receber o id do veiculo para edição via parametro
       this.sub = this.activatedRoute.params.subscribe(params => {
       this.id = +params['id'];
 
+      //verifica se possui Id pra buscar os dados do veiculo para edição, senão ñ faz nada pois se trata de um novo veiculo
       if(this.id != 0){
         this.getVeiculoById(this.id);
       }
@@ -51,7 +57,7 @@ export class AddEditComponent implements OnInit {
      }
 
     addEditVeiculo(): void {
-
+      //verifica se possui Id pra saber se deve salvar um novo ou atualizar um existente
       if(this.id != 0){
         this.veiculoService.updateVeiculo(this.veiculo, this.id)
         .subscribe(

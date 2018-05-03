@@ -11,6 +11,9 @@ export class VeiculoComponent implements OnInit {
 
   veiculos: Veiculo[];
   errorMessage: String;
+
+  //variavel que indica primeira paginacao na carregar da pagina
+  //Ref HTML (pageChange)="p = $event"
   p: number = 1;
 
   constructor(private veiculoService : VeiculoService) {
