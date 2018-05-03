@@ -1,0 +1,45 @@
+<form id="form-veiculo" [formGroup] = "form" [ngClass] = "'add-edit'" (ngSubmit) = "addEditVeiculo()">
+		<div>
+			<label>Alugado:</label>
+			<label class="switch">
+			  <input [(ngModel)]="veiculo.alugado" formControlName="alugado" type="checkbox" checked>
+			  <span class="slider round"></span>
+			</label>
+		</div>
+
+		<div>
+			<label>Placa:</label>
+				<input type="text" formControlName="placa" [(ngModel)]="veiculo.placa">
+				<small class="error" [hidden]="form.controls.placa.valid">
+		        Campo Obrigatorio.
+		    </small>
+		</div>
+
+		<div>
+			<label>Modelo:</label>
+				<input [(ngModel)]="veiculo.modelo" formControlName="modelo" type="text">
+				<small class="error" [hidden]="form.controls.modelo.valid">
+		        Campo Obrigatorio.
+		    </small>
+		</div>
+
+		<div>
+			<label>Ano:</label>
+				<input type="number"  formControlName="ano" [(ngModel)]="veiculo.ano">
+				<small class="error" [hidden]="form.controls.ano.valid">
+		        Campo Obrigatorio.
+		    </small>
+		</div>
+
+		<div>
+			<label>Cor:</label>
+				<input type="text" formControlName="cor" [(ngModel)]="veiculo.cor">
+				<small class="error" [hidden]="form.controls.cor.valid">
+		        Campo Obrigatorio.
+		    </small>
+		</div>
+
+		<div class="btnArea">
+			<input type="submit" [disabled] = "!form.valid" value="Salvar" class="btn btnAdd">
+		</div>
+	</form>

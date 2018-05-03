@@ -1,0 +1,40 @@
+
+<div id="veiculos" [ngClass] = "'veiculos'">
+
+		<div class="btnArea">
+			<a [routerLink]="['/add-edit', 0]" class="btn btnAdd">ADD veiculo</a>
+		</div>
+
+		<table>
+		<tr>
+			<th>Placa</th>
+			<th>Modelo</th>
+			<th>Ano</th>
+			<th>Cor</th>
+			<th>Status</th>
+			<th></th>
+			<th></th>
+		</tr>
+		  <tr *ngFor="let veiculo of veiculos | paginate: { itemsPerPage: 5, currentPage: p }">
+			<td>{{ veiculo.placa }}</td>
+			<td>{{ veiculo.modelo }}</td>
+			<td>{{ veiculo.ano }}</td>
+			<td>{{ veiculo.cor }}</td>
+			<td>
+				<div>
+					<div *ngIf="veiculo.alugado"><span class="livre">Livre</span></div>
+					<div *ngIf="!veiculo.alugado"><span class="alugado">Alugado</span></div>
+				</div>
+			</td>
+			<td>
+				<a [routerLink]="['/add-edit', veiculo.id]"><i class="material-icons">mode_edit</i></a>
+			</td>
+			<td>
+				<button (click)="deleteVeiculo(veiculo.id)"><i class="material-icons" >delete</i></button>
+			</td>
+		  </tr>
+		</table>
+		<pagination-controls (pageChange)="p = $event" previousLabel="Anterior" nextLabel="Proximo"></pagination-controls>
+
+		<div *ngIf="errorMessage"> {{errorMessage}} </div>
+	</div>
